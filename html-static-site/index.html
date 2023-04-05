@@ -22,7 +22,7 @@
     <script>
         let image = null
         function con_img() {
-            fetch("http://54.89.157.150/:8088/process-image", {
+            fetch("http://54.89.157.150:8088/process-image", {
                 method: "POST",
                 body: JSON.stringify({image, name: "test", surname: "test", numbers: [1,2,3]}),
                 headers: {
