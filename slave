@@ -3,8 +3,8 @@ pipeline {
         environment {
             DOCKER_CONTAINER_NAME_FRONTEND = "frontend_server"
             DOCKER_CONTAINER_NAME_BACKEND = "backend_server"
-            DOCKER_IMAGE_NAME_FRONTEND     = "trdamp/html-static-site:v1"
-            DOCKER_IMAGE_NAME_BACKEND     = "trdamp/backend-site:v1"
+            DOCKER_IMAGE_NAME_FRONTEND     = "chaowat10/frontend-site:v1"
+            DOCKER_IMAGE_NAME_BACKEND     = "chaowat10/backend-site:v1"
         }
 
         stages {

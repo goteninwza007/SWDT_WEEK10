@@ -2,13 +2,9 @@ version: '3'
 
 services:
   backend:
-    build:
-      context: ./backend-site
-      dockerfile: Dockerfile
-    image: trdamp/backend-site:v1
+    build: ./backend-site
+    image: chaowat10/backend-site:v1
 
   frontend:
-    build:
-      context: ./html-static-site
-      dockerfile: Dockerfile
-    image: trdamp/html-static-site:v1
+    build: ./html-static-site
+    image: chaowat10/frontend-site:v1
