@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+        stages {
+            stage('Initialize Stage') {
+                steps {
+                    echo 'Initial : Delete containers and images'
+                     dir('SWDT_WEEK10') {
+                        echo "Current path is  ${pwd()}"
+                        sh 'docker-compose down --rmi all --volumes || true'
+                     }
+                }
+            }
+
+            stage('Build Stage'){
+                steps {
+                    dir('SWDT_WEEK10') {
+                        sh "ls"
+                        echo "Current path is ${pwd()}"
+                        sh "docker-compose build"
+                   
+                    }
+                }
+            }
+            stage('Push Stage'){
+                steps {
+                    dir('SWDT_WEEK10') {
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                            sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                        }
+                        sh 'docker push chaowat10/backend-site:v1'
+                        sh 'docker push chaowat10/frontend-site:v1'
+                    }
+                }
+            }
+
+            stage('Trigger to puller job'){
+                steps {
+                    build job: 'slave-pipeline'
+                }
+            }
+        }
+}
