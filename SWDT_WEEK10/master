@@ -28,15 +28,15 @@ pipeline {
                         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                             sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
                         }
-                        sh 'docker push trdamp/backend-site:v1'
-                        sh 'docker push trdamp/html-static-site:v1'
+                        sh 'docker push chaowat10/backend-site:v1'
+                        sh 'docker push chaowat10/frontend-site:v1'
                     }
                 }
             }
 
             stage('Trigger to puller job'){
                 steps {
-                    build job: 'docker-pull-pipeline'
+                    build job: 'slave-pipeline'
                 }
             }
         }
